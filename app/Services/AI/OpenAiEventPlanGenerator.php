@@ -14,7 +14,7 @@ class OpenAiEventPlanGenerator implements EventPlanGeneratorInterface
             'messages' => [
                 [
                     'role'    => 'system',
-                    'content' => 'You are an expert event planner. Always respond with valid JSON only.',
+                    'content' => 'You are an expert event planner. Generate a realistic event plan based on budget and location. Always respond with valid JSON only.',
                 ],
                 [
                     'role'    => 'user',
