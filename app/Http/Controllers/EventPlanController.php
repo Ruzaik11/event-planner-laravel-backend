@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Contracts\EventPlanGeneratorInterface;
 use App\Contracts\ImageSearchInterface;
 use App\Http\Requests\GenerateEventPlanRequest;
+use App\Http\Requests\ImageSearchRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class EventPlanController extends Controller
         return response()->json($eventPlan);
     }
 
-    public function searchImage(Request $request)
+    public function searchImage(ImageSearchRequest $request)
     {
         $imageUrls = $this->imageSearch->search($request->imageQuery);
 
