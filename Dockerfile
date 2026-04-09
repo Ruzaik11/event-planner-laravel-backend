@@ -21,8 +21,6 @@ RUN git config --global --add safe.directory /var/www/html
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN cp .env.example .env || true
-
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 storage bootstrap/cache
 
