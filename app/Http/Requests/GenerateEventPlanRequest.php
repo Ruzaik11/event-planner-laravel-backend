@@ -25,11 +25,11 @@ class GenerateEventPlanRequest extends FormRequest
     public function rules()
     {
         return [
-            'eventType'  => ['required', 'string', 'in:birthday-party,wedding,engagement,corporate-event,baby-shower'],
-            'city'       => ['required', 'string', 'in:ottawa,toronto,montreal,vancouver,calgary'],
+            'eventType'  => ['required', 'string', 'exists:event_types,slug'],
+            'city'       => ['required', 'string', 'exists:cities,slug'],
             'guestCount' => ['required', 'integer', 'min:1', 'max:1000'],
             'budget'     => ['required', 'numeric', 'min:100'],
-            'dietary'    => ['required', 'string', 'in:halal,vegetarian,vegan,gluten-free,none'],
+            'dietary'    => ['required', 'string', 'exists:dietary_preferences,slug'],
         ];
     }
 
