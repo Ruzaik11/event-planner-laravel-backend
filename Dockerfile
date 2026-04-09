@@ -7,14 +7,13 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
     curl \
-    && docker-php-ext-install pdo pdo_mysql pdo_pgsql zip
+    && docker-php-ext-install pdo_mysql pdo_pgsql zip
 
 RUN a2enmod rewrite
 
 WORKDIR /var/www/html
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
 COPY . .
 
 RUN git config --global --add safe.directory /var/www/html
@@ -26,6 +25,6 @@ RUN chown -R www-data:www-data /var/www/html \
 
 COPY apache.conf /etc/apache2/sites-available/000-default.conf
 
-EXPOSE 10000
+EXPOSE 80
 
-CMD sed -i 's/Listen 80/Listen 10000/' /etc/apache2/ports.conf && apache2-foreground
+CMD ["apache2-foreground"]
