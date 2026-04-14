@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Requests;
 
+use App\Rules\ValidRecaptcha;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Contracts\Validation\Validator;
 
 class GenerateEventPlanRequest extends FormRequest
 {
@@ -30,6 +31,11 @@ class GenerateEventPlanRequest extends FormRequest
             'guestCount' => ['required', 'integer', 'min:1', 'max:1000'],
             'budget'     => ['required', 'numeric', 'min:100'],
             'dietary'    => ['required', 'string', 'exists:dietary_preferences,slug'],
+            'recaptchaToken' => [
+                'required',
+                'string',
+                new ValidRecaptcha($this->ip()),
+            ],
         ];
     }
 
